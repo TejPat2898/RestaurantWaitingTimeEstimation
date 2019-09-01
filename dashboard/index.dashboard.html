@@ -1,0 +1,651 @@
+<!--
+=========================================================
+ Paper Dashboard 2 - v2.0.0
+=========================================================
+
+ Product Page: https://www.creative-tim.com/product/paper-dashboard-2
+ Copyright 2019 Creative Tim (https://www.creative-tim.com)
+ Licensed under MIT (https://github.com/creativetimofficial/paper-dashboard/blob/master/LICENSE)
+
+ Coded by Creative Tim
+
+=========================================================
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    Restuarunt Queing
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+  <!-- CSS Files -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/css/paper-dashboard.css?v=2.0.0" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="assets/demo/demo.css" rel="stylesheet" />
+
+  <!-- Front end table styling BEGIN -->
+
+        <style>
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+      </style>
+      <script language="javascript">
+        function addRow(){
+          var table = document.getElementById('tableid');
+          var rowcount = table.rows.length;
+          var row = table.insertRow(rowcount);
+
+          var cell0 = row.insertCell(0);
+          var cell1 = row.insertCell(1);
+          var cell2 = row.insertCell(2);
+          var cell3 = row.insertCell(3);
+          cell1.innerHTML = rowcount.value;
+          cell1.innerHTML = document.getElementById('gname').value;
+          cell2.innerHTML = document.getElementById('gsize').value;
+          cell3.innerHTML = document.getElementById('gcontact').value;
+
+
+        }
+
+      </script>
+
+  <!-- Front end table Styling END -->
+
+</head>
+
+<body class="">
+  <div class="wrapper ">
+    <div class="sidebar" data-color="white" data-active-color="danger">
+      <!--
+        Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
+    -->
+      <div class="logo">
+        <a href="#!/user" class="simple-text logo-mini">
+          <div class="logo-image-small">
+            <img src="assets/img/logo-small.png">
+          </div>
+        </a>
+        <a href="#!/user" class="simple-text logo-normal">
+          Manager
+          <!-- <div class="logo-image-big">
+            <img src="../assets/img/logo-big.png">
+          </div> -->
+        </a>
+      </div>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="active ">
+            <a href="#!/">
+              <i class="nc-icon nc-bank"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+
+          <li>
+            <a href="#!/notifications">
+              <i class="nc-icon nc-bell-55"></i>
+              <p>Notifications</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+        <div class="container-fluid" >
+          <div class="navbar-wrapper">
+            <div class="navbar-toggle">
+              <button type="button" class="navbar-toggler">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+              </button>
+            </div>
+            <a class="navbar-brand" href="#pablo">Restaurant Queing</a>
+          </div>
+        </div>
+      </nav>
+      <!-- End Navbar -->
+      <!-- <div class="panel-header panel-header-lg">
+
+  <canvas id="bigDashboardChart"></canvas>
+
+
+</div> -->
+      <div class="content">
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card ">
+              <div class="card-header ">
+                <h5 class="card-title">Waiting Queue</h5>
+                <!-- Hardcoded Queue Table BEGINS  -->
+
+                      <table id="waitingq">
+                        <tr>
+
+                          <th width="30%">Group</th>
+                          <th width="4%">Group Size</th>
+
+                          <th>Contact</th>
+                        </tr>
+
+                        <tr ng-repeat="i in rg.need.queue">
+
+                          <td>{{i[0]}}</td>
+                          <td>{{i[1]}}</td>
+
+                          <td>{{i[4]}}</td>
+                        </tr>
+                      </table>
+
+
+                <!-- Hardcoded Queue Table ENDS -->
+              </div>
+              <div class="card-body ">
+                <canvas id=chartHours width="400" height="100"></canvas>
+              </div>
+              <div class="card-footer ">
+                <hr>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- INPUT FIELD CARDS  BEGIN  -->
+<form  name="form" ng-submit= "form.$valid && rg.signup()" novalidate>
+          <div class="row">
+
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-body ">
+                  <div class="row">
+                    <div class="col-5 col-md-4">
+                      <div class="icon-big text-center icon-warning">
+                        <i class="nc-icon nc-single-02 text-warning"></i>
+                      </div>
+                    </div>
+
+                    <div class="col-7 col-md-8">
+                      <div class="numbers">
+                        <p class="card-category" >Group Name</p>
+                        <p></p>
+                          <p class="card-category" style="padding-bottom: 0px;padding-top: 12px;">
+
+                            <div class="form-group" ng-class="{ 'has-error': form.$submitted && form.username.$invalid }">
+                            <label for="username" style="font-size : xx-small;">Group Name:</label>
+                            <input type="text"  name="username" class="form-control" ng-pattern="/^[A-Z][A-Za-z]{3,19}$/" autocomplete="username" ng-model="rg.gname" required />
+
+                            <div ng-messages="form.$submitted && form.username.$error" class="help-block">
+
+                            <div ng-message="required" class="text-danger" style="font-size : xx-small;">Group Name Required! </div>
+                            </div>
+                          </div>
+                        <p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer ">
+                  <hr>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-body ">
+                  <div class="row">
+                    <div class="col-5 col-md-4">
+                      <div class="icon-big text-center icon-warning">
+                        <i class="nc-icon nc-badge text-success"></i>
+                      </div>
+                    </div>
+                    <div class="col-7 col-md-8">
+                      <div class="numbers">
+                        <p class="card-category">Group Size</p>
+                        <p></p>
+                        <p class="card-category" style="padding-bottom: 0px;padding-top: 12px;">
+
+                          <div class="form-group" ng-class="{ 'has-error': form.$submitted && form.size.$invalid }">
+                            <label for="size" style="font-size : xx-small;">Group Size:</label>
+                            <input type="number" name="size" ng-maxlength="2" class="form-control" autocomplete="new-password" ng-model="rg.gsize" required />
+                            <div ng-messages="form.$submitted && form.size.$error" class="help-block">
+                            <div ng-message="required"class="text-danger"style="font-size : xx-small;">Group Size required!</div>
+                            </div>
+                          </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer ">
+                 <hr>
+                </div>
+              </div>
+            </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-body ">
+                  <div class="row">
+                    <div class="col-5 col-md-4">
+                      <div class="icon-big text-center icon-warning">
+                        <i class="nc-icon nc-chat-33 text-success"></i>
+                      </div>
+                    </div>
+                    <div class="col-7 col-md-8">
+                      <div class="numbers">
+                        <p class="card-category">Contact</p>
+                        <p></p>
+                        <p class="card-category" style="padding-bottom: 0px;padding-top: 12px;">
+
+
+                          <div class="form-group" ng-class="{ 'has-error': form.$submitted && form.password.$invalid }">
+                            <label for="mobile" style="font-size : xx-small;">Contact:</label>
+                            <input type="number" name="password" ng-maxlength="10" class="form-control" autocomplete="new-password" ng-model="rg.phone" required />
+                            <div ng-messages="form.$submitted && form.password.$error" class="help-block">
+                            <div ng-message="required"class="text-danger" style="font-size : xx-small;">Contact no. required!</div>
+                            </div>
+                          </div>
+
+
+                        </p>
+                          <p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer ">
+                 <hr>
+                </div>
+              </div>
+            </div>
+<!--Adding Cuisine dropdown option  BEGINS -->
+
+<div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-body ">
+            <div class="row">
+              <div class="col-5 col-md-4">
+                <div class="icon-big text-center icon-warning">
+                  <i class="nc-icon nc-chat-33 text-success"></i>
+                </div>
+              </div>
+              <div class="col-7 col-md-8">
+                <div class="numbers">
+                  <p class="card-category">Meal Type</p>
+                  <p></p>
+                  <p class="card-category" style="padding-bottom: 0px;padding-top: 12px;">
+
+                    <div class="form-group"  ng-class="{ 'has-error': form.$submitted && form.username1.$invalid }">
+                      <label for="username1" style="font-size : xx-small;">Meal Type:</label>
+                      <select name = "username1" class="form-control" ng-model="rg.type" required>
+                        <option ng-repeat="a in rg.menu" value="{{a}}">{{a}}</option>
+                      </select>
+                      <div ng-messages="form.$submitted && form.username1.$error" class="help-block">
+                      <div ng-message="required"class="text-danger" style="font-size : xx-small;">Meal type required!</div>
+                      </div>
+
+                    </div>
+
+
+                  </p>
+                    <p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer ">
+           <hr>
+          </div>
+        </div>
+      </div>
+
+<!--Adding Cuisine dropdown option ENDS-->
+
+
+
+
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-body ">
+                  <div class="row">
+                    <div class="col-5 col-md-4">
+                      <div class="icon-big text-center icon-warning">
+                        <i class="nc-icon nc-cloud-upload-94 text-primary"></i>
+                      </div>
+                    </div>
+                    <div class="col-7 col-md-8">
+                      <div class="numbers">
+                        <p class="card-category">Customer Entry</p>
+                        <p class="card-title" class="col-7 col-md-8" class="col-7 col-md-8">
+
+                          <div class="form-group" style="margin-bottom :  30px;">
+                      		<button ng-disabled="rg.password!=rg.cpassword" type="submit"  class="btn btn-primary" >Submit</button>
+                      		<img ng-if="rg.loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAA
+                      		MLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWphe
+                      		GxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUm
+                      		cG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu
+                      		7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAE
+                      		AAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfv
+                      		wQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DY
+                      		lJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgX
+                      		GJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQO
+                      		RfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAA
+                      		AAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLW
+                      		zpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjC
+                      		YRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                      	</div>
+
+                        <p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer ">
+                  <hr>
+                </div>
+              </div>
+            </div>
+
+
+
+        </div>
+</form>
+        <!-- INPUT FIELD CARDS END -->
+
+        <script src="assets/js/core/jquery.min.js"></script>
+        <script src="assets/js/core/popper.min.js"></script>
+        <script src="assets/js/core/bootstrap.min.js"></script>
+        <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+        <!--  Google Maps Plugin    -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+        <!-- Chart JS -->
+        <script src="assets/js/plugins/chartjs.min.js"></script>
+        <!--  Notifications Plugin    -->
+        <script src="assets/js/plugins/bootstrap-notify.js"></script>
+        <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+        <script src="assets/js/paper-dashboard.min.js?v=2.0.0" type="text/javascript"></script>
+        <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
+        <script src="assets/demo/demo.js"></script>
+        <div class="row">
+         <div class="col-md-12">
+            <div class="card ">
+              <div class="card-header ">
+                <h5 class="card-title">Table Arrangements</h5>
+                <canvas id="canvas" width="1500" height="700">
+
+                </canvas>
+
+                <script>
+
+                var canvas=document.getElementById("canvas");
+                var ctx=canvas.getContext("2d");
+                var table;
+                var image;
+                var boolean;
+                boolean=true;
+                if(boolean==true)
+                {
+                for(i=1;i<=2;i++)
+                {
+                  table=i;
+                  ctx.fillStyle="green";
+                  roundRect(ctx,200,i*200,50,100,20,true);
+                  ctx.stroke();
+                  ctx.font="30px arial";
+                  ctx.fillStyle="black";
+                  ctx.fillText(i,215,(i*200)+50);
+
+                }
+                for(i=1;i<=2;i++)
+                {
+                  table=i+2;
+                  ctx.fillStyle="green";
+                  roundRect(ctx,850,i*200,50,100,20,true);
+                  ctx.stroke();
+                  ctx.font="30px arial";
+                  ctx.fillStyle="black";
+                  ctx.fillText(i+2,865,(i*200)+50);
+                }
+                for(i=1;i<=2;i++)
+                {
+                  table=i+4;
+                  ctx.fillStyle="green";
+                  roundRect(ctx,400,i*200,100,100,20,true);
+                  ctx.stroke();
+                  ctx.font="30px arial";
+                  ctx.fillStyle="black";
+                  ctx.fillText(i+4,435,(i*200)+50);
+                }
+                for(i=1;i<=2;i++)
+                {
+                  table=i+6;
+                  ctx.fillStyle="green";
+                  roundRect(ctx,600,i*200,100,100,20,true);
+                  ctx.stroke();
+                  ctx.font="30px arial";
+                  ctx.fillStyle="black";
+                  ctx.fillText(i+6,635,(i*200)+50);
+                }
+                for(i=1;i<2;i++)
+                {
+                  table=i+8;
+                  ctx.fillStyle="green";
+                  roundRect(ctx,250,50,600,100,20,true);
+                  ctx.stroke();
+                  ctx.font="30px arial";
+                  ctx.fillStyle="black";
+                  ctx.fillText(i+8,545,(i*50)+50);
+                }
+                for(i=1;i<2;i++)
+                {
+                  table=i+9;
+                  ctx.fillStyle="green";
+                  roundRect(ctx,250,550,600,100,20,true);
+                  ctx.stroke();
+                  ctx.font="30px arial";
+                  ctx.fillStyle="black";
+                  ctx.fillText(i+9,545,(i*550)+50);
+                }
+                table=10;
+                boolean=false;
+
+                if(table==1&&boolean==false)
+                {
+                  ctx.fillStyle="red";
+                  roundRect(ctx,200,200,50,100,20,true);
+                  ctx.stroke();
+                  ctx.font="30px arial";
+                  ctx.fillStyle="black";
+                  ctx.fillText(1,215,250);
+                }
+                if(table==2&&boolean==false)
+                {
+                  ctx.fillStyle="red";
+                  roundRect(ctx,200,400,50,100,20,true);
+                  ctx.stroke();
+                  ctx.font="30px arial";
+                  ctx.fillStyle="black";
+                  ctx.fillText(2,215,450);
+                }
+                if(table==3&&boolean==false)
+                {
+                  ctx.fillStyle="red";
+                  roundRect(ctx,850,200,50,100,20,true);
+                  ctx.stroke();
+                  ctx.font="30px arial";
+                  ctx.fillStyle="black";
+                  ctx.fillText(3,865,250);
+                }
+                if(table==4&&boolean==false)
+                {
+                  ctx.fillStyle="red";
+                  roundRect(ctx,850,400,50,100,20,true);
+                  ctx.stroke();
+                  ctx.font="30px arial";
+                  ctx.fillStyle="black";
+                  ctx.fillText(4,865,450);
+                }
+                if(table==5&&boolean==false)
+                {
+                  ctx.fillStyle="red";
+                  roundRect(ctx,400,200,100,100,20,true);
+                  ctx.stroke();
+                  ctx.font="30px arial";
+                  ctx.fillStyle="black";
+                  ctx.fillText(5,435,250);
+                }
+                if(table==6&&boolean==false)
+                {
+                  ctx.fillStyle="red";
+                  roundRect(ctx,400,400,100,100,20,true);
+                  ctx.stroke();
+                  ctx.font="30px arial";
+                  ctx.fillStyle="black";
+                  ctx.fillText(6,435,450);
+                }
+                if(table==7&&boolean==false)
+                {
+                  ctx.fillStyle="red";
+                  roundRect(ctx,600,200,100,100,20,true);
+                  ctx.stroke();
+                  ctx.font="30px arial";
+                  ctx.fillStyle="black";
+                  ctx.fillText(7,635,250)
+                }
+                if(table==8&&boolean==false)
+                {
+                  ctx.fillStyle="red";
+                  roundRect(ctx,600,400,100,100,20,true);
+                  ctx.stroke();
+                  ctx.font="30px arial";
+                  ctx.fillStyle="black";
+                  ctx.fillText(8,635,450)
+                }
+                if(table==9&&boolean==false)
+                {
+                  ctx.fillStyle="red";
+                  roundRect(ctx,250,50,600,100,20,true);
+                  ctx.stroke();
+                  ctx.font="30px arial";
+                  ctx.fillStyle="black";
+                  ctx.fillText(9,555,100);
+                }
+
+
+
+                if(table==10&&boolean==false)
+              {
+                 ctx.fillStyle="red";
+                  roundRect(ctx,250,550,600,100,20,true);
+                  ctx.stroke();
+                  ctx.font="30px arial";
+                  ctx.fillStyle="black";
+                  ctx.fillText(10,545,600);
+              }
+              for(y=100;y<=600;y=y+80)
+              {
+                var q=Math.ceil(Math.random()*8)
+                ctx.rect(1100,y,100,80);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.arc(1150,y+40,30,0,2*Math.PI,true);
+                ctx.fillStyle="pink";
+                ctx.fill();
+                ctx.stroke();
+                ctx.font="30px arial";
+                ctx.fillStyle="black";
+                ctx.fillText(q,1140,y+50);
+              }
+              function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
+  if (typeof stroke == "undefined" ) {
+    stroke = true;
+  }
+  if (typeof radius === "undefined") {
+    radius = 5;
+  }
+  ctx.beginPath();
+  ctx.moveTo(x + radius, y);
+  ctx.lineTo(x + width - radius, y);
+  ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+  ctx.lineTo(x + width, y + height - radius);
+  ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+  ctx.lineTo(x + radius, y + height);
+  ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+  ctx.lineTo(x, y + radius);
+  ctx.quadraticCurveTo(x, y, x + radius, y);
+  ctx.closePath();
+  if (stroke) {
+    ctx.stroke();
+  }
+  if (fill) {
+    ctx.fill();
+  }
+}
+}
+              </script>
+                <hr>
+              </div>
+              <div class="card-body ">
+                <canvas id=topview width="500" height="400"></canvas>
+              </div>
+              <div class="card-footer ">
+                <hr>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--   Core JS Files   -->
+  <script src="assets/js/core/jquery.min.js"></script>
+  <script src="assets/js/core/popper.min.js"></script>
+  <script src="assets/js/core/bootstrap.min.js"></script>
+  <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!--  Google Maps Plugin    -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+  <!-- Chart JS -->
+  <script src="assets/js/plugins/chartjs.min.js"></script>
+  <!--  Notifications Plugin    -->
+  <script src="assets/js/plugins/bootstrap-notify.js"></script>
+  <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="assets/js/paper-dashboard.min.js?v=2.0.0" type="text/javascript"></script>
+  <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
+  <script src="assets/demo/demo.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Javascript method's body can be found in assets/assets-for-demo/js/demo.js
+      demo.initChartsPages();
+    });
+  </script>
+</body>
+
+</html>
